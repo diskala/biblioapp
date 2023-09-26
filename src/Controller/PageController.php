@@ -15,15 +15,15 @@ class PageController extends AbstractController
         return $this->render('page/index.html.twig', [
             'controller_name' => 'Page',
             'books'=>$books->findBy(
-                [],
-                ['id'=>'DESC'],
-                10
+                [],                  // trier par ou WHERE
+                ['id'=>'DESC'],     // ordonner  ou ORDER BY
+                10                 // LIMIT
             ),
 
         ]);
     }
 
-    #[Route('/contact', name: 'app_contact')]
+    #[Route('/contact', name: 'app_contact', methods:['GET','POST'])] 
     public function contact(): Response
     {
         return $this->render('page/contact.html.twig', [
