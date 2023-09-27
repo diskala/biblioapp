@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\AuthorRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Book;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Mime\Message;
+use App\Repository\AuthorRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: AuthorRepository::class)]
 class Author
 {
@@ -17,17 +19,44 @@ class Author
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\length(
+        min: 2,
+        max: 50,
+        minMessage:'Minimum{{limit}} caractères attendus',
+        maxMessage:'Maximum{{limit}} caractères attendus',
+    )]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255)]
+    
     private ?string $lastname = null;
 
     #[ORM\Column(nullable: true)]
+    
+    #[Assert\length(
+        min: 4,
+        max: 4,
+        minMessage:'saisissez une année avec {{limit}} caractères attendus',
+         
+    )]
+
+    #[Assert\Positive(
+         message: 'saisissez une année valide',
+    )]
     private ?int $year = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    
+
     private ?string $bio = null;
 
+    #[Assert\Url(
+    
+        //Message: 'saisissez un URL valide avec https://',
+         
+    )]
+
+     
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $link = null;
 
