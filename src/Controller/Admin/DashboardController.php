@@ -8,6 +8,7 @@ use App\Entity\Client;
 use App\Entity\Editeur;
 use App\Entity\Format;
 use App\Entity\Language;
+use App\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -60,6 +61,7 @@ class DashboardController extends AbstractDashboardController
          yield MenuItem::linkToCrud('Formats', 'fas fa-arrows-up-down-left-right', Format::class);
          yield MenuItem::linkToCrud('Langues', 'fas fa-language', Language::class);
          yield MenuItem::section('Autres');
+         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
          yield MenuItem::linkToRoute('Route au site', 'fas fa-arrow-left', 'app_page');
          
     }
